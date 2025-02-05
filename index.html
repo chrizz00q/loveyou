@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locked Page</title>
+    <style>
+        #locked-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            text-align: center;
+        }
+        #real-content {
+            display: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height to center vertically */
+            text-align: center; /* Ensure the text is centered as well */
+        }
+        .button-link {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .button-link:hover {
+            background-color: #45a049;
+        }
+        .bypass-btn {
+            background-color: #f44336;
+        }
+        .bypass-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+    <script>
+        function updateTimer(unlockTime) {
+            let countdown = setInterval(() => {
+                let currentTime = new Date().getTime();
+                let timeLeft = unlockTime - currentTime;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById("locked-screen").style.display = "none";
+                    document.getElementById("real-content").style.display = "block";
+                } else {
+                    let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    // Update the timer display
+                    document.getElementById("timer").innerText = `Unlocking in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+        }
+
+        function checkUnlock() {
+            // Set the unlock time to February 9, 2025, at 12:00 AM (PHT)
+            let unlockDate = new Date('2025-02-09T00:00:00+08:00'); // February 9, 2025, at 12:00 AM PHT
+            let unlockTime = unlockDate.getTime();
+
+            // Set the initial countdown time to exactly 3d 7h 41m from the current time
+            let initialCountdown = new Date().getTime() + (3 * 24 * 60 * 60 * 1000) + (7 * 60 * 60 * 1000) + (41 * 60 * 1000);
+
+            // Use the initial countdown time, not reset each time
+            localStorage.setItem("unlockTime", unlockTime); // Store the unlock time in localStorage
+            updateTimer(unlockTime);
+        }
+
+        function bypassCountdown() {
+            // Bypass the countdown and reveal the content immediately
+            document.getElementById("locked-screen").style.display = "none";
+            document.getElementById("real-content").style.display = "block";
+        }
+
+        document.addEventListener("DOMContentLoaded", checkUnlock);
+    </script>
+</head>
+<body>
+    <div id="locked-screen">
+        <p>This will unlock on February 9, 2025, at 12:00 AM </p>
+        <p id="timer">Calculating time...</p>
+        <!-- Bypass Button -->
+        <button class="bypass-btn" onclick="bypassCountdown()">Bypass Countdown</button>
+    </div>
+    <div id="real-content">
+        <a href="1.html" class="button-link" target="_blank">Click Me</a>
+    </div>
+</body>
+</html>
