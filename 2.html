@@ -1,35 +1,229 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday!</title>
   <link rel="stylesheet" href="./style.css">
+  <style>
+.heart-btn {
+    position: absolute; /* Make sure button stays fixed */
+    width: 50px; /* Smaller size */
+    height: 50px; /* Smaller size */
+    background-color: red;
+    border: none;
+    outline: none;
+    transform: rotate(-45deg) translate(-50%, -50%); /* Center the button */
+    cursor: pointer;
+    animation: pump 1.5s infinite ease-in-out;
+    top: 90%; /* Vertically center */
+    left: 50%; /* Horizontally center */
+}
 
+.heart-btn:before,
+.heart-btn:after {
+    content: "";
+    position: absolute;
+    width: 50px; /* Smaller size */
+    height: 50px; /* Smaller size */
+    border-radius: 50%;
+    background-color: red;
+}
+
+.heart-btn:before {
+    left: 0;
+    top: -20px;
+}
+
+.heart-btn:after {
+    left: 20px;
+    top: 0;
+}
+
+/* Pump Animation */
+@keyframes pump {
+    0%, 100% {
+        transform: scale(1) rotate(-45deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(-45deg);
+    }
+}
+
+/* Animation for the popup images */
+.popup-image {
+    position: absolute;
+    width: 150px; /* Image size */
+    height: 150px; /* Image size */
+    object-fit: cover;
+    border-radius: 10px;
+    animation: pop 2s forwards;
+}
+
+@keyframes pop {
+    0% {
+        opacity: 1;
+        transform: scale(0) translate(0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translate(50px, -50px);
+    }
+}
+</style>
 </head>
 <body>
   <div class="book-section">
     <h1>Happy Birthday Mahall</a></h1>
-     <div class="container">
-        <div class="right">
-             <figure class="back" id="back-cover"></figure>
-             <figure class="front" style="background-image: url('cute.jpg');">4</figure>
-         </div>
-         <div class="right">
-          <figure class="back" style="background-image: url('');">3</figure>
-          <figure class="front" style="background-image: url('');">2</figure>
+    <div class="container">
+      <div class="right">
+        <figure class="back" id="back-cover"></figure>
+        <figure class="front" style="background-image: url('cute.jpg');"></figure>
       </div>
-         <div class="right">
-             <figure class="back" style="background-image: url('');">1</figure>
-             <figure class="front" style="background-image: url('front.jpg');">
-                 <h1>To My Love Of My Life</h1>
-                 <p style="text-align: right; margin-top: 260px;">09/02/2025</p>
-             </figure>
-         </div>
-     </div>
-     <button onclick="turnLeft()">Prev</button> <button onclick="turnRight()">Next</button>
-     <br/>
-     <canvas id="birthday"></canvas>
- </div>
- <script src="script.js"></script>
+      <div class="right">
+        <figure class="back" style="background-image: url('');">
+          <p>95. The way you love me <br>
+            96. Your sweet side <br>
+            97. Your kisses <br>
+            98. Your uniqueness <br>
+            99. You being you <br>
+            100. You <br></p> <br><br> <p>
+              Happy birthday mahalll and happy valentine's day!!
+            </p>
+        </figure>
+        <figure class="front" style="background-image: url('');">
+          <p>77. You changed me in a good way <br>
+            78. You have loved me through everything <br>
+            79. Your concern for me <br>
+            80. You're the best thing that ever happened to me <br>
+            81. You're careful <br>
+            82. Your acceptance <br>
+            83. Your soft, comforting voice <br>
+            84. Your attitude <br>
+            85. Your excitement <br>
+            86. Your self-awareness <br>
+            87. Your passion for what you love <br>
+            88. Your taste in music <br>
+            89. You are amazing <br>
+            90. Your humility <br>
+            91. Your presence <br>
+            92. Your big heart <br>
+            93. Your loyalty <br>
+            94. The way you carry yourself <br></p>
+        </figure>
+      </div>
+      <div class="right">
+        <figure class="back" style="background-image: url('');">
+          <p>59. Your bravery <br>
+            60. Your existence <br>
+            61. You have such a sweet soul <br>
+            62. You make me feel safe <br>
+            63. You notice small things about me <br>
+            64. You bring out my inner child <br>
+            65. Your generosity <br>
+            66. Your pride in yourself and others <br>
+            67. The way you look at me <br>
+            68. Your giving nature <br>
+            69. Your commitment <br>
+            70. The things I’ve learned from you <br>
+            71. You're adorable <br>
+            72. Your actions <br>
+            73. Our late-night talks <br>
+            74. You make me feel important <br>
+            75. Your words of affirmation <br>
+            76. You are inspiring <br>
+            77. You changed me in a good way <br></p>
+        </figure>
+        <figure class="front" style="background-image: url('');">
+          <p>39. Your attention <br>
+            40. You don’t judge me <br>
+            41. Your opinion <br>
+            42. Our connection <br>
+            43. Our bond <br>
+            44. Your self-care <br>
+            45. Your clinginess <br>
+            46. Your efforts <br>
+            47. You make me feel warm <br>
+            48. Your flaws <br>
+            49. Your maturity <br>
+            50. Your manners <br>
+            51. You're cute <br>
+            52. You made me a better person <br>
+            53. You're charming <br>
+            54. Your advice <br>
+            55. Your seriousness <br>
+            56. Your loving nature <br>
+            57. Your sweetness <br>
+            58. Your calmness <br></p>
+        </figure>
+      </div>
+      <div class="right">
+        <figure class="back" style="background-image: url('');">
+          <p>19. You push me to study <br>
+            20. Your forgiving heart <br>
+            21. Your charm <br>
+            22. You are caring <br>
+            23. You motivate me <br>
+            24. Your intelligence <br>
+            25. Your thoughtfulness <br>
+            26. Your love <br>
+            27. Your appreciation <br>
+            28. Your curiosity <br>
+            29. Your soul <br>
+            30. Your teasing <br>
+            31. Your belief in me <br>
+            32. Your natural beauty <br>
+            33. You are amazing <br>
+            34. Your understanding <br>
+            35. Your dedication to your goals <br>
+            36. Your compliments <br>
+            37. Your reassurance <br>
+            38. Your little jokes <br></p>
+        </figure>
+        <figure class="front" style="background-image: url('');">
+          <p h1>100 Reasons Why I Love You <br></p>
+          <p>1. Your eyes <br>
+            2. Your lips <br>
+            3. Your cheeks <br>
+            4. Your smile <br>
+            5. Your curly hair <br>
+            6. Your teeth <br>
+            7. Your laugh <br>
+            8. Your humor <br>
+            9. The way you correct me <br>
+            10. You're gorgeous <br>
+            11. You're pretty <br>
+            12. You're beautiful <br>
+            13. Your voice <br>
+            14. Your energy <br>
+            15. The way you communicate <br>
+            16. Your love language <br>
+            17. Your ability to comfort me <br>
+            18. Your support for me <br></p>
+        </figure>
+      </div>
+      <div class="right">
+        <figure class="back" style="background-image: url('');">
+          <p style="margin-top: 70px;">Happy birthday, mahal ko! Mahal na mahal kita. Wish ko na makamit mo ang mga
+            pangarap mo sa buhay. Lagi kitang susuportahan sa mga bagay na magpapasaya sa'yo. Lagi mong isipin na
+            nandito lang ako—kakampi mo sa lahat. <br></p>
+
+          Wish ko rin na umuwi ka na sa Manila para magkita na tayo. Gustong-gusto na kitang makita, mahal ko. <br>
+
+          I love you so much! Mahal na mahal kita. ❤️</p>
+        </figure>
+        <figure class="front" style="background-image: url('front.jpg');">
+          <h1>To My Love Of My Life</h1>
+          <p style="text-align: right; margin-top: 260px;">09/02/2025</p>
+        </figure>
+      </div>
+    </div>
+    <button onclick="turnLeft()">Prev</button> <button onclick="turnRight()">Next</button>
+    <br />
+    <canvas id="birthday"></canvas>
+  </div>
+  <button class="heart-btn" onclick="releaseImagesAndPlaySound(event)">
+    <audio id="kissSound" src="kisses.mp3" preload="auto"></audio>
+  </button>
+  <script src="script.js"></script>
 </body>
 </html>
