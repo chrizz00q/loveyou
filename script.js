@@ -4,49 +4,49 @@ let si = right.length;
 let z = 1;
 
 window.onload = function () {
-    resetToCover();
+  resetToCover();
 };
 
 function resetToCover() {
-    si = right.length;
-    for (let i = 0; i < right.length; i++) {
-        right[i].classList.remove("flip");
-        right[i].style.zIndex = "auto";
-    }
-    cover.style.zIndex = z;
+  si = right.length;
+  for (let i = 0; i < right.length; i++) {
+    right[i].classList.remove("flip");
+    right[i].style.zIndex = "auto";
+  }
+  cover.style.zIndex = z;
 }
 
 function turnRight() {
-    if (si >= 1) {
-        si--;
-    } else {
-        si = right.length - 1;
-        function sttmot(i) {
-            setTimeout(() => { right[i].style.zIndex = "auto"; }, 300);
-        }
-        for (let i = 0; i < right.length; i++) {
-            right[i].className = "right";
-            sttmot(i);
-            z = 1;
-        }
+  if (si >= 1) {
+    si--;
+  } else {
+    si = right.length - 1;
+    function sttmot(i) {
+      setTimeout(() => { right[i].style.zIndex = "auto"; }, 300);
     }
-    right[si].classList.add("flip");
-    z++;
-    right[si].style.zIndex = z;
+    for (let i = 0; i < right.length; i++) {
+      right[i].className = "right";
+      sttmot(i);
+      z = 1;
+    }
+  }
+  right[si].classList.add("flip");
+  z++;
+  right[si].style.zIndex = z;
 }
 
 function turnLeft() {
-    if (si < right.length) {
-        si++;
-    } else {
-        si = 1;
-        for (let i = right.length - 1; i > 0; i--) {
-            right[i].classList.add("flip");
-            right[i].style.zIndex = right.length + 1 - i;
-        }
+  if (si < right.length) {
+    si++;
+  } else {
+    si = 1;
+    for (let i = right.length - 1; i > 0; i--) {
+      right[i].classList.add("flip");
+      right[i].style.zIndex = right.length + 1 - i;
     }
-    right[si - 1].className = "right";
-    setTimeout(() => { right[si - 1].style.zIndex = "auto"; }, 350);
+  }
+  right[si - 1].className = "right";
+  setTimeout(() => { right[si - 1].style.zIndex = "auto"; }, 350);
 }
 
 // helper functions
@@ -64,39 +64,39 @@ class Birthday {
     this.counter = 0
 
   }
-  
+
   resize() {
     this.width = canvas.width = window.innerWidth
     let center = this.width / 2 | 0
     this.spawnA = center - center / 4 | 0
     this.spawnB = center + center / 4 | 0
-    
+
     this.height = canvas.height = window.innerHeight
     this.spawnC = this.height * .1
     this.spawnD = this.height * .5
-    
+
   }
-  
+
   onClick(evt) {
-     let x = evt.clientX || evt.touches && evt.touches[0].pageX
-     let y = evt.clientY || evt.touches && evt.touches[0].pageY
-     
-     let count = random(3,5)
-     for(let i = 0; i < count; i++) this.fireworks.push(new Firework(
-        random(this.spawnA, this.spawnB),
-        this.height,
-        x,
-        y,
-        random(0, 260),
-        random(30, 110)))
-          
-     this.counter = -1
-     
+    let x = evt.clientX || evt.touches && evt.touches[0].pageX
+    let y = evt.clientY || evt.touches && evt.touches[0].pageY
+
+    let count = random(3, 5)
+    for (let i = 0; i < count; i++) this.fireworks.push(new Firework(
+      random(this.spawnA, this.spawnB),
+      this.height,
+      x,
+      y,
+      random(0, 260),
+      random(30, 110)))
+
+    this.counter = -1
+
   }
-  
+
   update(delta) {
     ctx.globalCompositeOperation = 'hard-light'
-    ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`
+    ctx.fillStyle = `rgba(20,20,20,${7 * delta})`
     ctx.fillRect(0, 0, this.width, this.height)
 
     ctx.globalCompositeOperation = 'lighter'
@@ -152,7 +152,7 @@ class Firework {
 
     } else {
       if (this.offsprings && !this.madeChilds) {
-        
+
         let babies = this.offsprings / 2
         for (let i = 0; i < babies; i++) {
           let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
@@ -166,17 +166,17 @@ class Firework {
       this.madeChilds = true
       this.history.shift()
     }
-    
+
     if (this.history.length === 0) this.dead = true
-    else if (this.offsprings) { 
-        for (let i = 0; this.history.length > i; i++) {
-          let point = this.history[i]
-          ctx.beginPath()
-          ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
-          ctx.arc(point.x, point.y, 1, 0, PI2, false)
-          ctx.fill()
-        } 
-      } else {
+    else if (this.offsprings) {
+      for (let i = 0; this.history.length > i; i++) {
+        let point = this.history[i]
+        ctx.beginPath()
+        ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
+        ctx.arc(point.x, point.y, 1, 0, PI2, false)
+        ctx.fill()
+      }
+    } else {
       ctx.beginPath()
       ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
       ctx.arc(this.x, this.y, 1, 0, PI2, false)
@@ -196,14 +196,62 @@ window.onresize = () => birthday.resize()
 document.onclick = evt => birthday.onClick(evt)
 document.ontouchstart = evt => birthday.onClick(evt)
 
-  ;(function loop(){
-  	requestAnimationFrame(loop)
+  ; (function loop() {
+    requestAnimationFrame(loop)
 
-  	let now = timestamp()
-  	let delta = now - then
+    let now = timestamp()
+    let delta = now - then
 
     then = now
     birthday.update(delta / 1000)
-  	
+
 
   })()
+
+  function releaseImagesAndPlaySound(event) {
+    // Array of image URLs (you can replace these with your own URLs)
+    const images = [
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        'kiss1.png', // Replace with actual image URLs
+        'kiss2.png',  // Replace with actual image URLs
+        
+    ];
+
+    // Loop through each image and create a popup image
+    images.forEach((src) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.classList.add('popup-image');
+
+        // Get random position for the image
+        const randomX = Math.random() * window.innerWidth;  // Random X position within window
+        const randomY = Math.random() * window.innerHeight; // Random Y position within window
+
+        // Set the position of the image
+        img.style.left = `${randomX}px`;
+        img.style.top = `${randomY}px`;
+
+        // Add the image to the body
+        document.body.appendChild(img);
+
+        // Remove the image after 2 seconds (duration of the animation)
+        setTimeout(() => {
+            img.remove();
+        }, 2000); // Match the duration of the animation (2 seconds)
+    });
+
+    // Play the sound effect
+    const sound = document.getElementById('kissSound');
+    sound.play();
+}
